@@ -1,0 +1,345 @@
+{
+  "group_name": "ИС-13-1",
+  "days": [
+    {
+      "weekday": 1,
+      "lessons": [
+        {
+          "subject": "Английский язык",
+          "type": 0,
+          "time_number": 4,
+          "parity": 1,
+          "teachers": [
+            {
+              "teacher_name": "Зибров Дмитрий Анатольевич"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "1-416"
+            }
+          ]
+        },
+        {
+          "subject": "Информатика и программирование",
+          "type": 2,
+          "time_number": 4,
+          "parity": 2,
+          "teachers": [
+            {
+              "teacher_name": "Ведерникова Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-402"
+            }
+          ]
+        },
+        {
+          "subject": "Информатика и программирование",
+          "type": 0,
+          "time_number": 5,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Ведерникова Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-407"
+            }
+          ]
+        },
+        {
+          "subject": "Английский язык",
+          "type": 0,
+          "time_number": 6,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Демидов Марк Павлович"
+            },
+            {
+              "teacher_name": "Зибров Дмитрий Анатольевич"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "1-421"
+            },
+            {
+              "auditory_name": "1-420"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 2,
+      "lessons": [
+        {
+          "subject": "Математика",
+          "type": 0,
+          "time_number": 4,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        },
+        {
+          "subject": "Вычислительные системы, сети и телекоммуникации",
+          "type": 0,
+          "time_number": 5,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Сорокин Александр Васильевич"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-207"
+            }
+          ]
+        },
+        {
+          "subject": "Вычислительные системы, сети и телекоммуникации",
+          "type": 2,
+          "time_number": 6,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Сорокин Александр Васильевич"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-408"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 3,
+      "lessons": [
+        {
+          "subject": "Дискретная математика",
+          "type": 2,
+          "time_number": 4,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        },
+        {
+          "subject": "Дискретная математика",
+          "type": 0,
+          "time_number": 5,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        },
+        {
+          "subject": "Дифференциальные и разностные уравнения",
+          "type": 2,
+          "time_number": 6,
+          "parity": 1,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-408"
+            }
+          ]
+        },
+        {
+          "subject": "Математика",
+          "type": 2,
+          "time_number": 6,
+          "parity": 2,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 4,
+      "lessons": [
+        {
+          "subject": "Физическая культура",
+          "type": 0,
+          "time_number": 4,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": ""
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 5,
+      "lessons": [
+        {
+          "subject": "Дифференциальные и разностные уравнения",
+          "type": 0,
+          "time_number": 4,
+          "parity": 1,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        },
+        {
+          "subject": "Дискретная математика",
+          "type": 0,
+          "time_number": 4,
+          "parity": 2,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        },
+        {
+          "subject": "Математика",
+          "type": 2,
+          "time_number": 5,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        },
+        {
+          "subject": "Математика",
+          "type": 0,
+          "time_number": 6,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Белых Татьяна Ивановна"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-403"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "weekday": 6,
+      "lessons": [
+        {
+          "subject": "Информационные системы и технологии",
+          "type": 2,
+          "time_number": 1,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Ступин Виталий Валерьевич"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-402"
+            }
+          ]
+        },
+        {
+          "subject": "Информационные системы и технологии",
+          "type": 0,
+          "time_number": 2,
+          "parity": 0,
+          "teachers": [
+            {
+              "teacher_name": "Ступин Виталий Валерьевич"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "3-407"
+            }
+          ]
+        },
+        {
+          "subject": "Английский язык",
+          "type": 0,
+          "time_number": 3,
+          "parity": 2,
+          "teachers": [
+            {
+              "teacher_name": "Демидов Марк Павлович"
+            }
+          ],
+          "auditories": [
+            {
+              "auditory_name": "1-421"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
