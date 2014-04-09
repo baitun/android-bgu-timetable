@@ -25,6 +25,7 @@
     if (w.location.href==="http://isea.ru/help/timetable/timetable.aspx?getTable") {
         // непосредственно код скрипта
 
+        //для работы с ajax понадобится jquery
         var e = document.createElement('script');
         e.src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
         document.getElementsByTagName('head')[0].appendChild(e);
