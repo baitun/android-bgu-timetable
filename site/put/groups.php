@@ -1,10 +1,9 @@
 <?php 
-header('Content-type: text/html; charset=utf-8');
+header('Content-type: application/x-javascript; charset=utf-8');
 require "../include/mysql_connect.php";
 
 $query="CREATE TABLE IF NOT EXISTS groups (group_id INTEGER, group_name TEXT, faculty_id INTEGER)";
 $res=mysql_query($query) or die(mysql_error()); 
-
 
 $faculty_id=$_GET["faculty_id"];
 $query="DELETE FROM `groups` WHERE faculty_id=$faculty_id";
