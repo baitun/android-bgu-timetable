@@ -208,22 +208,21 @@
         // конец скрипта
         
         function finish(){
-            if(confirm('Данные получены. Приступить к передаче?')){
-                var myForm=document.createElement("form");
-                myForm.method="post";
-                myForm.target="_blank";
-                myForm.action="http://test.savinyurii.ru/put/html_and_json.php";
-                for(var i=0; i<localStorage.length; i++){
-                    var input=document.createElement("input");
-                    input.type="hidden";
-                    input.name=localStorage.key(i);
-                    input.value=localStorage[localStorage.key(i)];
-                    myForm.appendChild(input);
-                }
-                myForm.submit();
-                alert("Данные переданы");
-                return;
+            alert("Готово!");
+            var myForm=document.createElement("form");
+            myForm.method="post";
+            myForm.target="_blank";
+            myForm.action="http://test.savinyurii.ru/put/html_and_json.php";
+            for(var i=0; i<localStorage.length; i++){
+                var input=document.createElement("input");
+                input.type="hidden";
+                input.name=localStorage.key(i);
+                input.value=localStorage[localStorage.key(i)];
+                myForm.appendChild(input);
             }
+            myForm.submit();
+            console.log("Данные переданы");
+            return;
         }
     }
 })(window);
