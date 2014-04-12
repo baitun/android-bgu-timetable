@@ -166,7 +166,19 @@
                 }
             });
 
-            if(selectedFacultyIndex==0){//для первого факультета
+
+            $.ajax({
+                    url: "http://test.savinyurii.ru/put/faculties.php",
+                    type: "GET",
+                    data: currentFacultyID+"="+currentFacultyName,
+                    dataType: "script",
+                    success: function(data){
+                        //alert("faculty_success");
+                    },
+                    jsonp: false
+                });
+
+            /*if(selectedFacultyIndex==0){//для первого факультета
                 var db=openDatabase("info","1.0","",1 * 1024 * 1024);
                 db.transaction(function(tx) {      
                     tx.executeSql('CREATE TABLE IF NOT EXISTS faculties (faculty_id INTEGER, faculty_name TEXT)');
@@ -189,7 +201,7 @@
                     },
                     jsonp: false
                 });
-            }
+            }*/
         }
 
         if(selectedGroupIndex<g.options.length-1){ // если не последняя группа этого факультета
