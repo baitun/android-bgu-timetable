@@ -5,8 +5,8 @@ require "../include/mysql_connect.php";
 $CREATE_TABLE="CREATE TABLE IF NOT EXISTS schedule(group_id INTEGER PRIMARY KEY, html_format TEXT, JSON_format TEXT)";
 $res=mysql_query($CREATE_TABLE) or die(mysql_error()); 
 
-$TRUNCATE="TRUNCATE TABLE schedule";
-$res=mysql_query($TRUNCATE) or die(mysql_error()); 
+// $TRUNCATE="TRUNCATE TABLE schedule";
+// $res=mysql_query($TRUNCATE) or die(mysql_error()); 
 
 $i=0;// шаги цикла
 $j=0;// количество запросов к БД

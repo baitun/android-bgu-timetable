@@ -216,5 +216,5 @@ pip-log.txt
 
 
 #My Exceptions
-include/
+mysql_connect.php
 _SYNCAPP/
