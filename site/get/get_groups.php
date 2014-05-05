@@ -13,7 +13,7 @@ if($faculty_id){
 		}
 		echo '{"groups":'.json_encode_utf8($output).'}';
 	}
-	else echo '{"error": "Ошибка запроса"}';
+	else echo '{"error": "Ошибка при выполнении запроса к MySQL"}';
 }
 else echo '{"error": "Не передан ID факультета"}';
 

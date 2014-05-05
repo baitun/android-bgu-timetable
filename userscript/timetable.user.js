@@ -25,6 +25,7 @@
     if (w.location.href==="http://isea.ru/help/timetable/timetable.aspx?getTable") {
         // непосредственно код скрипта
 
+        if(!w) w=window; //для локального тестирования
         //для работы с ajax понадобится jquery
         var e = document.createElement('script');
         e.src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
@@ -48,7 +49,14 @@
                 return;
             }
             tstWindow.close();
+            
+            //очистка всего от предыдущих результатов работы
             localStorage.clear();
+            $.ajax({
+                url: "http://test.savinyurii.ru/put/clear_all.php",
+                dataType: "script",
+                jsonp: false,
+            });
         }
         
         var tableObject=document.getElementById("main").getElementsByTagName("table")[0]; //первая таблица в #main
@@ -91,20 +99,25 @@
                             case "пр": tmpLesson.type=0; break; //Практика
                             case "лаб": tmpLesson.type=1; break; //Лабораторная
                             case "л": tmpLesson.type=2; break; //Лекция
+                            case "конс": tmpLesson.type=4; break; //Консультация
+                            case "вне": tmpLesson.type=5; break; //Внеучебное занятие
+                            case "зач": tmpLesson.type=6; break; //Зачёт
+                            case "экз": tmpLesson.type=7; break; //Экзамен
                             default: 
-                                alert("Ошибка определения типа занятия: "+i);
+                                alert("Ошибка определения типа занятия на строке: "+i);
                                 return;
                         }
-                        switch(trows[i].children[0].innerText){
-                            case  "9:00": tmpLesson.time_number=1; break;
-                            case "10:35": tmpLesson.time_number=2; break;
-                            case "12:10": tmpLesson.time_number=3; break;
-                            case "14:00": tmpLesson.time_number=4; break;
-                            case "15:35": tmpLesson.time_number=5; break;
-                            case "17:10": tmpLesson.time_number=6; break;
-                            case "18:45": tmpLesson.time_number=7; break;
+                        tmpLesson.time_start=trows[i].children[0].innerText;
+                        switch(tmpLesson.time_start){
+                            case  "9:00": tmpLesson.time_end="10:20"; tmpLesson.time_number=1; break;
+                            case "10:35": tmpLesson.time_end="11:55"; tmpLesson.time_number=2; break;
+                            case "12:10": tmpLesson.time_end="13:30"; tmpLesson.time_number=3; break;
+                            case "14:00": tmpLesson.time_end="15:20"; tmpLesson.time_number=4; break;
+                            case "15:35": tmpLesson.time_end="16:55"; tmpLesson.time_number=5; break;
+                            case "17:10": tmpLesson.time_end="18:30"; tmpLesson.time_number=6; break;
+                            case "18:45": tmpLesson.time_end="20:05"; tmpLesson.time_number=7; break;
                             default: 
-                                alert("Ошибка определения времени: "+i);
+                                alert("Ошибка определения времени на строке: "+i);
                                 return;
                         }
                         switch(trows[i].children[1].className){
@@ -112,11 +125,14 @@
                             case "odd1": tmpLesson.parity=1; break;
                             case "odd2": tmpLesson.parity=2; break;
                             default:
-                                alert("Ошибка определения чётности: "+i);
+                                alert("Ошибка определения чётности на строке: "+i);
                                 return;
                         }
                         tmpLesson.teachers=[{teacher_name: trows[i].children[5].innerText}];
-                        tmpLesson.auditories=[{auditory_name:trows[i].children[4].innerText}];                        
+                        tmpLesson.auditories=[{auditory_name:trows[i].children[4].innerText}];
+                        tmpLesson.date_start=null;
+                        tmpLesson.date_end=null;
+                        tmpLesson.dates=null;
 
                         tmpDay.lessons.push(tmpLesson);
                     }           
