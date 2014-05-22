@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="choose_faculty">Выберите факультет</string>
+    <string name="choose_group">Выберите группу</string>
+    
+    <string-array name="weekdays">
+		<item>Понедельник</item>
+		<item>Вторник</item>
+		<item>Среда</item>
+		<item>Четверг</item>
+		<item>Пятница</item>
+		<item>Суббота</item>
+		<item>Воскресенье</item>
+	</string-array>
+	
+    <string name="lable_app_name">Расписание БГУЭП</string>
+    <string name="lable_choosing">Выбор расписания</string>
+
+    <!--  Menu items -->
+    <string name="settings">Настройки</string>
+    <string name="refresh">Обновить</string>
+    <string name="change_group">Изменить группу</string>
+
+    <!--  NetworkActivity -->
+    <string name="lost_connection">Соединение прервано.</string>
+    <string name="wifi_connected">Wi-Fi подключён.</string>
+    <string name="connection_error">Ошибка при загрузке. \n Проверьте ваше соединение с интернетом.</string>
+    
+</resources>

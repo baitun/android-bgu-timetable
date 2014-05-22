@@ -4,8 +4,8 @@
 body   
 {
     font-family:  Arial, Helvetica, Verdana, sans-serif,"Helvetica Neue", "Lucida Grande", "Segoe UI";
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     font-size: .80em;
     color: #333333;
 }
@@ -51,13 +51,13 @@ h1, h2, h3, h4, h5, h6
     font-variant: small-caps;
     text-transform: none;
     font-weight: 200;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 h1
 {
     font-size: 2.0em;
-    padding-bottom: 0px;
+    padding-bottom: 0;
     margin-bottom: 10px;
     margin-top:15px;
     
@@ -97,46 +97,12 @@ h5, h6
 first child of the left and right table columns */
 .rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
 {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 
 /* PRIMARY LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
-
-.page
-{
-    width: 1180px;
-    background-color: #fff;
-    margin: 0px auto 20px auto;
-    border: 1px solid #496077;
-}
-
-.header
-{
-    position: relative;
-    margin: 0px;
-    padding: 0px;
-    background:  transparent;
-    width: 100%;
-    height:250px;
-    
-}
-.pic
-{	position:absolute;
-	margin-top:49px;
-	background:#2e7cbb;
-	width:100%;
-	
-	}
-.bgmain
-{
-	position:absolute;
-	margin:0px 0 0 0;
-	
-	
-	}
-
 .s7
 {
 	position:absolute;
@@ -356,14 +322,14 @@ padding-top:10px;
 #main
 {
     margin: auto;
-    width: 800px;
+    max-width: 800px;
+    padding: 0 2px;
 }
 #main table
 {
-	border: 1px solid #dddddd;
-	border-collapse:collapse;
-	margin:15px 10px;
 	width:100%;
+	border:1px solid #dddddd;
+	border-collapse:collapse;
 }
 #main table th
 {

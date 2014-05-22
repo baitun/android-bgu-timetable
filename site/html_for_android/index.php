@@ -1,7 +1,7 @@
 <?php 
 header('Content-type: text/html; charset=utf-8');
-require "./include/mysql_connect.php";
-$groupID=$_GET['group'];
+require "../include/mysql_connect.php";
+$groupID=$_GET['group_id'];
 $groupName;
 if($groupID){
 	$query="SELECT group_name FROM groups WHERE group_id=$groupID";
@@ -20,20 +20,22 @@ mysql_close();
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo "Расписание ".$groupName ?></title>
-	<meta name="viewport" content="width=device-width"/>
-	<link href="/include/css/isea.css" rel="stylesheet" type="text/css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes"/>
+	<!-- <link href="/include/css/android.css" rel="stylesheet" type="text/css" /> -->
+	<style><?php include "../include/css/android.css" ?></style>
 </head>
 <body>
 <div id="main">
 <?php 
 if($res){
-	echo "<h1>$groupName</h1>";
 
 	$row=mysql_fetch_array($res); //первая строка результатов в виде ассоциативного массива
 	echo $row['HTML_format'];
 	
 }
-else echo "<h1>ОШИБКА</h1>";
+else {
+	echo "<h1>ОШИБКА</h1>";
+}
  ?>	
 </div>
 

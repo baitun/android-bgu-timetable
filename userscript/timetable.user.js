@@ -21,15 +21,43 @@
     if (w.self != w.top) {
         return;
     }
+
     // дополнительная проверка наряду с @include
     if (w.location.href==="http://isea.ru/help/timetable/timetable.aspx?getTable") {
+        addJQueryAndStart(mainFunction);
+    }
+
+
+    function addJQueryAndStart(callback) {
+        // a function that loads jQuery and calls a callback function when jQuery has finished loading
+        
+        var script = document.createElement("script");
+        script.setAttribute("src", "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");
+        //script.setAttribute("src", "http://jquery.com/src/jquery-latest.js");
+        script.addEventListener(
+            'load', 
+            function() {
+                var script = document.createElement("script");
+                script.textContent = "(" + callback.toString() + ")();";
+                document.body.appendChild(script);
+            }, 
+            false
+        );
+        document.body.appendChild(script);
+    }
+
+    function mainFunction() {
         // непосредственно код скрипта
 
-        if(!w) w=window; //для локального тестирования
+        var w=window;
         //для работы с ajax понадобится jquery
         var e = document.createElement('script');
         e.src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
         document.getElementsByTagName('head')[0].appendChild(e);
+        if(!$){
+            alert("not jquery");
+            return;
+        }
 
         // select'ы в форме        
         var f=document.getElementById('MainContent_DDLfaculty');
@@ -52,11 +80,11 @@
             
             //очистка всего от предыдущих результатов работы
             localStorage.clear();
-            $.ajax({
-                url: "http://test.savinyurii.ru/put/clear_all.php",
-                dataType: "script",
-                jsonp: false,
-            });
+            // $.ajax({
+            //     url: "http://test.savinyurii.ru/put/clear_all.php",
+            //     dataType: "script",
+            //     jsonp: false,
+            // });
         }
         
         var tableObject=document.getElementById("main").getElementsByTagName("table")[0]; //первая таблица в #main
@@ -141,15 +169,17 @@
             schedule.days.push(tmpDay); //добавить последний день
             scheduleString=JSON.stringify(schedule); // перевод JS объекта в JSON строку
             tableString=tableObject.outerHTML; //содержимое таблицы
+
+             // null элементы не записываются
+             //К именам ключей дабавляются идентефикаторы
+            localStorage[currentGroupID+"HTML"]=tableString;
+            localStorage[currentGroupID+"JSON"]=scheduleString;
 		}
         else{ // таблицы может и не быть (нет расписания для этой группы)
             scheduleString=null;
             tableString=null; 
         }
-        //К именам ключей дабавляются идентефикаторы
-        // !!! Не менять формат вывода! put/html_and_json.php пологается на правильный формат вывода
-        localStorage[currentGroupID+"HTML"]=tableString;
-        localStorage[currentGroupID+"JSON"]=scheduleString;
+       
 
 
         console.log(f.selectedOptions[0].text+" "+g.selectedOptions[0].text); // факультет группа
@@ -167,6 +197,7 @@
                 }
             });
             
+            // передача всех групп этого факультета
             var parametrsArray=["faculty_id="+currentFacultyID];
             for(var i=0;i<g.options.length;i++){
                 parametrsArray.push(g.options[i].value+"="+g.options[i].text);
@@ -183,6 +214,7 @@
             });
 
 
+            // передача 1 текущего факультета
             $.ajax({
                     url: "http://test.savinyurii.ru/put/faculties.php",
                     type: "GET",
@@ -203,6 +235,7 @@
                     }
                 });
 
+                // передача всех факультетов
                 var parametrsFacultiesArray=new Array();
                 for(var i=0;i<f.options.length;i++){
                     parametrsFacultiesArray.push(f.options[i].value+"="+f.options[i].text);
