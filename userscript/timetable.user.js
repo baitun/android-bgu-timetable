@@ -48,8 +48,7 @@
 
     function mainFunction() {
         // непосредственно код скрипта
-
-        var w=window;
+        
         //для работы с ajax понадобится jquery
         var e = document.createElement('script');
         e.src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
@@ -58,6 +57,9 @@
             alert("not jquery");
             return;
         }
+        
+        var baseURL="http://irkvuz.ru/isea/timetable/" //"http://test.savinyurii.ru/"
+        var w=window;
 
         // select'ы в форме        
         var f=document.getElementById('MainContent_DDLfaculty');
@@ -73,18 +75,29 @@
         if(selectedFacultyIndex==0 && selectedGroupIndex==0){// скрипт сработал первый раз (на первой странице)
             tstWindow=w.open("", "_blank");
             if(!tstWindow){ //проверка на блокировку всплывающих окон
-                alert("Для работы скрипта нужно разрешить показ всплывающих окон. /nПосле разрешения перезагрузить страницу дя повторного запуска.");
+                alert("Для работы скрипта нужно разрешить показ всплывающих окон. /nПосле разрешения перезагрузить страницу для повторного запуска.");
                 return;
             }
             tstWindow.close();
             
             //очистка всего от предыдущих результатов работы
             localStorage.clear();
-            // $.ajax({
-            //     url: "http://test.savinyurii.ru/put/clear_all.php",
-            //     dataType: "script",
-            //     jsonp: false,
-            // });
+            // это лучше делать вручную
+            if(confirm('Очистить БД?')){
+                $.ajax({
+                    url: baseURL+"put/clear_all.php",
+                    dataType: "script",
+                    jsonp: false,
+                    success: function(data, textStatus){
+                        console.log(textStatus);
+                        console.log('DB cleared');                        
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      console.error('DB not cleared: '+textStatus);
+                      return;
+                    }
+                });
+            }
         }
         
         var tableObject=document.getElementById("main").getElementsByTagName("table")[0]; //первая таблица в #main
@@ -98,7 +111,7 @@
             var tmpDay, tmpLesson;
             for(var i=1; i<trows.length; i++){ //идём по всем строком                
                 if(trows[i].childElementCount==1){ // наткнулись на день недели
-                    if(i>1) schedule.days.push(tmpDay); //если не первый найденный день, добавить предудущий в расписание
+                    if(i>1) schedule.days.push(tmpDay); //если не первый найденный день, добавить предыдущий в расписание
                     tmpDay=new Object();
                     switch(trows[i].children[0].innerText){
                         case "понедельник": tmpDay.weekday=1; break;
@@ -177,7 +190,9 @@
 		}
         else{ // таблицы может и не быть (нет расписания для этой группы)
             scheduleString=null;
-            tableString=null; 
+            tableString=null;
+            localStorage['_null_elements']+=', '+currentGroupName;//записываем группы, для которых нет расписания
+            localStorage['_null_elements_count']++; // и посчитаем их
         }
        
 
@@ -185,17 +200,6 @@
         console.log(f.selectedOptions[0].text+" "+g.selectedOptions[0].text); // факультет группа
 
         if(selectedGroupIndex==0){//для (первой группы) каждого факультета добавляем информацию о группа в ДБ
-            var db=openDatabase("info","1.0","",1 * 1024 * 1024);
-            if(!db) {
-                alert("Не получилось создать БД");
-                return;
-            };
-            db.transaction(function(tx) {                
-                tx.executeSql('CREATE TABLE IF NOT EXISTS groups (group_id INTEGER, group_name TEXT, faculty_id INTEGER)');
-                for(var i=0;i<g.options.length;i++){                
-                    tx.executeSql("INSERT INTO groups (group_id, faculty_id, group_name) values(?, ?, ?)", [g.options[i].value, currentFacultyID, g.options[i].text], null, null);
-                }
-            });
             
             // передача всех групп этого факультета
             var parametrsArray=["faculty_id="+currentFacultyID];
@@ -203,61 +207,47 @@
                 parametrsArray.push(g.options[i].value+"="+g.options[i].text);
             }
             $.ajax({
-                url: "http://test.savinyurii.ru/put/groups.php",
+                url: baseURL+"put/groups.php",
                 type: "GET",
                 data: parametrsArray.join("&"),
                 dataType: "script",
                 jsonp: false,
-                success: function(data){
-                    //alert("groups success");
+                success: function(data, textStatus){
+                    console.log('put groups success');
+                    console.log(textStatus);
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                  console.error('put groups error: '+textStatus);
+                  alert('put groups error');
+                  return;
                 }
             });
 
 
             // передача 1 текущего факультета
             $.ajax({
-                    url: "http://test.savinyurii.ru/put/faculties.php",
+                    url: baseURL+"put/faculties.php",
                     type: "GET",
                     data: currentFacultyID+"="+currentFacultyName,
-                    dataType: "script",
-                    success: function(data){
-                        //alert("faculty_success");
+                    dataType: "script",                    
+                    jsonp: false,
+                    success: function(data, textStatus){
+                        console.log('put faculty success');
+                        console.log(textStatus);
                     },
-                    jsonp: false
-                });
-
-            /*if(selectedFacultyIndex==0){//для первого факультета
-                var db=openDatabase("info","1.0","",1 * 1024 * 1024);
-                db.transaction(function(tx) {      
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS faculties (faculty_id INTEGER, faculty_name TEXT)');
-                    for(var i=0;i<f.options.length;i++){
-                        tx.executeSql("INSERT INTO faculties(faculty_id, faculty_name) values(?, ?, ?)", [f.options[i].value, f.options[i].text], null, null);
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      console.error('put faculty error');
+                      console.error(textStatus);
+                      return;
                     }
-                });
-
-                // передача всех факультетов
-                var parametrsFacultiesArray=new Array();
-                for(var i=0;i<f.options.length;i++){
-                    parametrsFacultiesArray.push(f.options[i].value+"="+f.options[i].text);
-                }
-                $.ajax({
-                    url: "http://test.savinyurii.ru/put/faculties.php",
-                    type: "GET",
-                    data: parametrsFacultiesArray.join("&"),
-                    dataType: "script",
-                    success: function(data){
-                        //alert("faculty_success");
-                    },
-                    jsonp: false
-                });
-            }*/
+                });            
         }
 
         if(selectedGroupIndex<g.options.length-1){ // если не последняя группа этого факультета
             g.value=g.options[selectedGroupIndex+1].value; // Слудующая группа
         }
         else { // последняя группа текущего факультета
-            if(selectedFacultyIndex<f.options.length-1) {
+            if(selectedFacultyIndex<f.options.length-1) { // и не последний факультет
                 f.value=f.options[selectedFacultyIndex+1].value; // Слудуюий факультет
             }
             else{ //последняя группа && последний факультет
@@ -270,19 +260,23 @@
         
         function finish(){
             alert("Готово!");
-            var myForm=document.createElement("form");
-            myForm.method="post";
-            myForm.target="_blank";
-            myForm.action="http://test.savinyurii.ru/put/html_and_json.php";
-            for(var i=0; i<localStorage.length; i++){
-                var input=document.createElement("input");
-                input.type="hidden";
-                input.name=localStorage.key(i);
-                input.value=localStorage[localStorage.key(i)];
-                myForm.appendChild(input);
+            if(confirm('Передать собранные данные?')){
+                var myForm=document.createElement("form");
+                myForm.method="post";
+                myForm.target="_blank";
+                myForm.action=baseURL+"put/html_and_json.php";
+                for(var i=0; i<localStorage.length; i++){
+                    if(localStorage.key(i)[0]!='_'){//избавляемся от посторонних записей в localStorage
+                        var input=document.createElement("input");
+                        input.type="hidden";
+                        input.name=localStorage.key(i);
+                        input.value=localStorage[localStorage.key(i)];
+                        myForm.appendChild(input);
+                    }
+                }
+                myForm.submit();
+                console.log("Данные отправлены");
             }
-            myForm.submit();
-            console.log("Данные переданы");
             return;
         }
     }

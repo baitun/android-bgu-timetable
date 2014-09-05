@@ -20,6 +20,7 @@ foreach ($_POST as $id=>$value){
 				echo "</br></br>Проблема с SQL на $idHTML<br/> $query";
 			}
 			$j++;
+			//echo $j;
 		}
 		else{
 			echo "Обработка данных прекращена из-за расхождения ключей!<br/> Ошибка возникла на паре ключей: '$idHTML' - '$idJSON'";
