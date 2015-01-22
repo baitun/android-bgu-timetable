@@ -3,7 +3,7 @@ header('Content-type: application/json; charset=utf-8');
 require "../include/mysql_connect.php";
 require "../include/json_encode.php";
 
-$query="SELECT faculty_id, faculty_name FROM faculties";
+$query="SELECT faculty_id, faculty_name FROM faculties ORDER BY faculty_name ASC ";
 $result = mysql_query($query) or die('{"error": "'.mysql_error().'"}'); 
 if($result){
 	while($row=mysql_fetch_assoc($result)){

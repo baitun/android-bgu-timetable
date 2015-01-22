@@ -22,18 +22,17 @@
         return;
     }
 
+    var modeUpdate=w.location.href==="http://isea.ru/help/timetable/timetable.aspx?update";
+    var modeRewrite=w.location.href==="http://isea.ru/help/timetable/timetable.aspx?getTable";    
     // дополнительная проверка наряду с @include
-    if (w.location.href==="http://isea.ru/help/timetable/timetable.aspx?getTable") {
+    if (modeRewrite || modeUpdate) {        
         addJQueryAndStart(mainFunction);
     }
 
-
-    function addJQueryAndStart(callback) {
-        // a function that loads jQuery and calls a callback function when jQuery has finished loading
-        
+    // a function that loads jQuery and calls a callback function when jQuery has finished loading
+    function addJQueryAndStart(callback) {              
         var script = document.createElement("script");
-        script.setAttribute("src", "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");
-        //script.setAttribute("src", "http://jquery.com/src/jquery-latest.js");
+        script.setAttribute("src", "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");        
         script.addEventListener(
             'load', 
             function() {
@@ -50,15 +49,15 @@
         // непосредственно код скрипта
         
         //для работы с ajax понадобится jquery
-        var e = document.createElement('script');
-        e.src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
-        document.getElementsByTagName('head')[0].appendChild(e);
+        // var e = document.createElement('script');
+        // e.src = "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js";
+        // document.getElementsByTagName('head')[0].appendChild(e);
         if(!$){
-            alert("not jquery");
+            alert("Нет подключена jquery!");
             return;
         }
         
-        var baseURL="http://irkvuz.ru/isea/timetable/" //"http://test.savinyurii.ru/"
+        var baseURL="http://irkvuz.ru/isea/timetable/";
         var w=window;
 
         // select'ы в форме        
@@ -83,8 +82,10 @@
             //очистка всего от предыдущих результатов работы
             localStorage.clear();
             // это лучше делать вручную
-            if(confirm('Очистить БД?')){
+            //if(confirm('Очистить БД?')){
+            if(true){
                 $.ajax({
+                    async: false,
                     url: baseURL+"put/clear_all.php",
                     dataType: "script",
                     jsonp: false,
@@ -135,7 +136,8 @@
                     }
                     else{ // а иначе создаём новую пару
                         tmpLesson=new Object();
-                        tmpLesson.subject=trows[i].children[2].innerText;
+                        var sbj=JSON.stringify(trows[i].children[2].innerText); //временная строка с предметом
+                        tmpLesson.subject=sbj.substr(1,sbj.length-2); //stringify нужен для экранирования кавычек внутри названия предмета, но он добавляет дополнительно 2 кавычки в начале и в конце, которые надо убрать
                         switch(trows[i].children[3].innerText){
                             case "пр": tmpLesson.type=0; break; //Практика
                             case "лаб": tmpLesson.type=1; break; //Лабораторная
@@ -199,7 +201,7 @@
 
         console.log(f.selectedOptions[0].text+" "+g.selectedOptions[0].text); // факультет группа
 
-        if(selectedGroupIndex==0){//для (первой группы) каждого факультета добавляем информацию о группа в ДБ
+        if(selectedGroupIndex==0){//для (первой группы) каждого факультета добавляем информацию о группах в ДБ
             
             // передача всех групп этого факультета
             var parametrsArray=["faculty_id="+currentFacultyID];
@@ -226,6 +228,7 @@
 
             // передача 1 текущего факультета
             $.ajax({
+                    async: false,
                     url: baseURL+"put/faculties.php",
                     type: "GET",
                     data: currentFacultyID+"="+currentFacultyName,
@@ -240,7 +243,8 @@
                       console.error(textStatus);
                       return;
                     }
-                });            
+                });
+            // alert("Убедимся, что всё передано для факультета "+currentFacultyName)            
         }
 
         if(selectedGroupIndex<g.options.length-1){ // если не последняя группа этого факультета
@@ -259,8 +263,9 @@
         // конец скрипта
         
         function finish(){
-            alert("Готово!");
-            if(confirm('Передать собранные данные?')){
+            //alert("Готово!");
+            //if(confirm('Передать собранные данные?')){
+            if(true){
                 var myForm=document.createElement("form");
                 myForm.method="post";
                 myForm.target="_blank";

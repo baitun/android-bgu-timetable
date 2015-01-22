@@ -5,7 +5,7 @@ require "../include/json_encode.php"; // Содержит исправленну
 
 $faculty_id=$_GET['faculty_id']; // ID факультета берётся из параметра GET-запроса
 if($faculty_id){ // Проверка, что ID передан
-	$query="SELECT group_id, group_name FROM groups WHERE faculty_id=$faculty_id"; //SQL запрос
+	$query="SELECT group_id, group_name FROM groups WHERE faculty_id=$faculty_id ORDER BY group_name ASC "; //SQL запрос
 	$result = mysql_query($query) or die('{"error": "'.mysql_error().'"}'); 
 	if($result){
 		while($row=mysql_fetch_assoc($result)){

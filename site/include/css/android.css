@@ -10,6 +10,16 @@ body {
     max-width: 800px;
     padding: 0 0px;
 }
+
+.date-info{
+	margin: 5px 0;
+	font-size: larger;
+}
+
+#parity{
+	
+}
+
 #main table{
 	width:100%;
 	border-collapse:collapse;
@@ -75,4 +85,12 @@ body {
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.today{
+	background: green;
+}
+
+.this-week{
+	opacity: 0.4;
 }
