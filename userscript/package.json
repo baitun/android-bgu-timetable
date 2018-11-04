@@ -1,0 +1,9 @@
+{
+  "name": "bgu-timetable-scrapper",
+  "version": "1.0.0",
+  "description": "Baikal State University timetable scrapper",
+  "main": "index.js",
+  "repository": "https://github.com/baitun/android-bgu-timetable.git",
+  "author": "Yury Savin",
+  "license": "MIT"
+}
