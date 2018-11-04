@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name Time Table groups
-// @description Get time table from isea.ru
+// @description Get time table from bgu.ru
 // @author Savin Yurii
 // @version 0.01
-// @include http://isea.ru/help/timetable/timetable.aspx?getGroups
+// @include http://bgu.ru/help/timetable/timetable.aspx?getGroups
 // ==/UserScript==
 
 //Использовать как userscript
@@ -23,7 +23,7 @@
   }
 
   // дополнительная проверка наряду с @include
-  if (w.location.href === "http://isea.ru/help/timetable/timetable.aspx?getGroups") {
+  if (w.location.href === "http://bgu.ru/help/timetable/timetable.aspx?getGroups") {
     addJQueryAndStart(mainFunction);
   }
 

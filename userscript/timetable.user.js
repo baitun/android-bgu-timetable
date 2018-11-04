@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name Time Table
-// @description Get time table from isea.ru
+// @description Get time table from bgu.ru
 // @author Savin Yurii
 // @version 0.01
-// @include http://isea.ru/help/timetable/timetable.aspx?getTable
+// @include http://bgu.ru/help/timetable/timetable.aspx?getTable
 // ==/UserScript==
 
 //Использовать как userscript
@@ -22,8 +22,8 @@
     return;
   }
 
-  var modeUpdate = w.location.href === "http://isea.ru/help/timetable/timetable.aspx?update";
-  var modeRewrite = w.location.href === "http://isea.ru/help/timetable/timetable.aspx?getTable";
+  var modeUpdate = w.location.href === "http://bgu.ru/help/timetable/timetable.aspx?update";
+  var modeRewrite = w.location.href === "http://bgu.ru/help/timetable/timetable.aspx?getTable";
   // дополнительная проверка наряду с @include
   if (modeRewrite || modeUpdate) {
     addJQueryAndStart(mainFunction);
