@@ -218,3 +218,4 @@ pip-log.txt
 #My Exceptions
 mysql_connect.php
 _SYNCAPP/
+node_modules
